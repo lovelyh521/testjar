@@ -44,28 +44,35 @@ public class TestFile {
         BufferedReader br = new BufferedReader(isr);
         String temp = null;
         temp = br.readLine();
-        System.out.println("temp1 = " + temp);
         String rXc0 = "";
 
         XSSFRow rowTitle = sheet.createRow(0);// 创建一个行对象(表头)
-
+        rowTitle.createCell(1).setCellValue("SubNetwork");
+        rowTitle.createCell(2).setCellValue("MEID");
+        rowTitle.createCell(3).setCellValue("ConfigSet");
+        rowTitle.createCell(4).setCellValue("ENBFunctionTDD");
+        rowTitle.createCell(5).setCellValue("GlobleSwitchInformationTDD");
+        rowTitle.createCell(6).setCellValue("配置集ID(ConfigSet)");
+        rowTitle.createCell(7).setCellValue("GL CSFB功能开关(gsmCsfbSwitch)");
 
         int i = 0;
+
         while (temp != null) {
             if(temp.indexOf("MO SDR_OMMB") != -1){
                 rXc0 = temp.replace("-","");
-                System.out.println("rXc0:"+rXc0);
+                temp = br.readLine();
                 continue;
             }
-            if(temp.startsWith("No") || temp.startsWith("结果") || temp.startsWith("管理对象标识") || temp.startsWith("-----")){
-
-                System.out.println("true = " + true+"sdf"+i);
-                System.out.println("temp = " + temp);
+            if(temp.indexOf("No")!=-1 || temp.indexOf("结果")!=-1 || temp.indexOf("管理对象标识")!=-1 || temp.indexOf("-----")!=-1){
+                temp = br.readLine();
                 continue;
+            }
+            if(temp.indexOf("批处理执") >=0){
+                System.out.println("break");
+                break;
             }
             XSSFRow row = sheet.createRow(i+1);// 创建一个行对象
-            if(temp != null){
-                System.out.println("temp = " + temp);
+            if(temp != null && !"".equals(temp.trim())){
                 String[] split = temp.trim().split("\\s+");
                 String[] split1 = split[0].split(",");
                 XSSFCell cell1 = row.createCell(0);// 创建单元格
@@ -78,11 +85,13 @@ public class TestFile {
                     XSSFCell cell = row.createCell(5+j);// 创建单元格
                     cell.setCellValue(split[j]);
                 }
+
                 i++;
             }
+
             temp = br.readLine();
         }
-
+        System.out.println("共转换 "+i+" 条数据");
         // 文件输出流
         String outFileName = fileName.substring(0, fileName.indexOf("."));
 
@@ -90,7 +99,12 @@ public class TestFile {
         if(!f.exists()){
             f.mkdir();
         }
+        for(int k=0 ;k<8;k++){
+            sheet.autoSizeColumn(k);
+        }
+
         FileOutputStream os = new FileOutputStream(".\\outputfile\\"+outFileName+".xlsx");
+//        FileOutputStream os = new FileOutputStream("d:\\"+outFileName+".xlsx");
         workBook.write(os);// 将文档对象写入文件输出流
 
         os.close();// 关闭文件输出流
