@@ -63,11 +63,11 @@ public class TestFile {
                 temp = br.readLine();
                 continue;
             }
-            if(temp.indexOf("No")!=-1 || temp.indexOf("结果")!=-1 || temp.indexOf("管理对象标识")!=-1 || temp.indexOf("-----")!=-1){
+            if(temp.indexOf("No")!=-1 || temp.trim().equals("结果")|| temp.indexOf("管理对象标识")!=-1 || temp.indexOf("-----")!=-1){
                 temp = br.readLine();
                 continue;
             }
-            if(temp.indexOf("批处理执") >=0){
+            if(temp.indexOf("本次批处理") >=0){
                 System.out.println("break");
                 break;
             }

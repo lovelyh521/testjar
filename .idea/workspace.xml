@@ -7,12 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0835df34-b26f-480b-b523-65fb6bfee0f7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/testjar_jar/testjar.jar" afterPath="$PROJECT_DIR$/out/artifacts/testjar_jar/testjar.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/testjar/MyMain.class" afterPath="$PROJECT_DIR$/out/production/testjar/MyMain.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Excute/TestFile.java" afterPath="$PROJECT_DIR$/src/Excute/TestFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyMain.java" afterPath="$PROJECT_DIR$/src/MyMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testjar.iml" afterPath="$PROJECT_DIR$/testjar.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,8 +45,8 @@
       <file leaf-file-name="TestFile.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Excute/TestFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
+            <state relative-caret-position="254">
+              <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,7 +101,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1924" />
@@ -294,15 +289,15 @@
       <workItem from="1500450126624" duration="14093000" />
       <workItem from="1500471714901" duration="3730000" />
       <workItem from="1500528613548" duration="2783000" />
-      <workItem from="1500532267553" duration="6315000" />
+      <workItem from="1500532267553" duration="7193000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26921000" />
+    <option name="totallyTimeSpent" value="27799000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -348,12 +343,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Excute/TestFile.java</url>
-          <line>70</line>
+          <line>73</line>
           <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -452,8 +447,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Excute/TestFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
+        <state relative-caret-position="254">
+          <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
