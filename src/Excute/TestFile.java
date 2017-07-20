@@ -1,13 +1,8 @@
 package Excute;
 
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Date;
 
 public class TestFile {
     public static String readFromFile(String filePath) throws IOException {
@@ -48,16 +43,39 @@ public class TestFile {
         InputStreamReader isr = new InputStreamReader(fin, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String temp = null;
-//        StringBuffer sb = new StringBuffer();
         temp = br.readLine();
+        System.out.println("temp1 = " + temp);
+        String rXc0 = "";
+
+        XSSFRow rowTitle = sheet.createRow(0);// 创建一个行对象(表头)
+
+
         int i = 0;
         while (temp != null) {
+            if(temp.indexOf("MO SDR_OMMB") != -1){
+                rXc0 = temp.replace("-","");
+                System.out.println("rXc0:"+rXc0);
+                continue;
+            }
+            if(temp.startsWith("No") || temp.startsWith("结果") || temp.startsWith("管理对象标识") || temp.startsWith("-----")){
 
-            XSSFRow row = sheet.createRow(i);// 创建一个行对象
+                System.out.println("true = " + true+"sdf"+i);
+                System.out.println("temp = " + temp);
+                continue;
+            }
+            XSSFRow row = sheet.createRow(i+1);// 创建一个行对象
             if(temp != null){
+                System.out.println("temp = " + temp);
                 String[] split = temp.trim().split("\\s+");
-                for (int j=0 ; j<split.length;j++){
-                    XSSFCell cell = row.createCell(j);// 创建单元格
+                String[] split1 = split[0].split(",");
+                XSSFCell cell1 = row.createCell(0);// 创建单元格
+                cell1.setCellValue(rXc0);
+                for(int s1 = 0 ;s1<split1.length;s1++){
+                    XSSFCell cell2 = row.createCell(s1+1);// 创建单元格
+                    cell2.setCellValue(split1[s1].split("=")[1]);
+                }
+                for (int j=1 ; j<split.length;j++){
+                    XSSFCell cell = row.createCell(5+j);// 创建单元格
                     cell.setCellValue(split[j]);
                 }
                 i++;
