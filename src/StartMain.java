@@ -4,6 +4,11 @@ import java.io.*;
 
 public class StartMain {
     public static void main(String[] args) {
+        String chatset = "GB2312";
+        if(args.length>0){
+            chatset = args[0];
+        }
+
 //        String path = "d:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
         String path = System.getProperty("user.dir")+ "\\sourceFile";
         System.out.println("读取文件目录："+path);
@@ -14,7 +19,7 @@ public class StartMain {
                 for(File fl:files){
                     if(fl.isFile()){
                         try {
-                            CreateFile.creat2007Excel(fl.getPath(),fl.getName());
+                            CreateFile.creat2007Excel(fl.getPath(),fl.getName(),chatset);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

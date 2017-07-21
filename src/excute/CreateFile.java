@@ -31,7 +31,7 @@ public class CreateFile {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void creat2007Excel(String filePath, String fileName) throws IOException {
+    public static void creat2007Excel(String filePath, String fileName,String charSet) throws IOException {
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet sheet = workBook.createSheet();
 
@@ -42,7 +42,7 @@ public class CreateFile {
         }
 
         FileInputStream fin = new FileInputStream(file);
-        InputStreamReader isr = new InputStreamReader(fin, "UTF-8");
+        InputStreamReader isr = new InputStreamReader(fin, charSet);
         BufferedReader br = new BufferedReader(isr);
         String temp = null;
         temp = br.readLine();
@@ -126,7 +126,7 @@ public class CreateFile {
 
         System.out.println("共转换 "+i+" 条数据");
         // 文件输出流
-        SimpleDateFormat sf = new SimpleDateFormat("yyMMddhhmmss");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddhhmmss");
         String format = sf.format(new Date());
         String outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
 
