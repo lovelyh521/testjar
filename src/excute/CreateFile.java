@@ -130,9 +130,9 @@ public class CreateFile {
         String format = sf.format(new Date());
         String outFileName = "";
         if(date !=null){
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7+format;
         }else{
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7;
         }
 
         File f = new File(".\\outputfile\\");
