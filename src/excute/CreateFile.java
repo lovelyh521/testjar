@@ -17,7 +17,7 @@ public class CreateFile {
         String temp = null;
         StringBuffer sb = new StringBuffer();
         temp = br.readLine();
-        while (temp != null) {
+            while (temp != null) {
             sb.append(temp + "\r\n");
             temp = br.readLine();
         }
