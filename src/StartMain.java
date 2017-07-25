@@ -4,10 +4,22 @@ import java.io.*;
 
 public class StartMain {
     public static void main(String[] args) {
-        String chatset = "GB2312";
-        if(args.length>0){
+        String charset = "GB2312";
+        String date = null;
+        /*if(args.length>0){
             chatset = args[0];
+        }*/
+        if(args.length > 0){
+            for (int i = 0;i < args.length;i++) {
+                if("date".equals(args[i])){
+                    date = args[i+1];
+                }
+                if("charset".equals(args[i])){
+                    charset = args[i+1];
+                }
+            }
         }
+
 
 //        String path = "d:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
         String path = System.getProperty("user.dir")+ "\\sourceFile";
@@ -19,7 +31,7 @@ public class StartMain {
                 for(File fl:files){
                     if(fl.isFile()){
                         try {
-                            CreateFile.creat2007Excel(fl.getPath(),fl.getName(),chatset);
+                            CreateFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

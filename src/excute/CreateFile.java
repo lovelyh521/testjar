@@ -31,7 +31,7 @@ public class CreateFile {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void creat2007Excel(String filePath, String fileName,String charSet) throws IOException {
+    public static void creat2007Excel(String filePath, String fileName,String charSet,String date) throws IOException {
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet sheet = workBook.createSheet();
 
@@ -53,7 +53,7 @@ public class CreateFile {
         while (temp != null) {
             if(temp.indexOf("No")!=-1){
                 if(flag){
-                    excute(fileName,workBook,sheet,i);
+                    excute(fileName,workBook,sheet,i,date);
                     i = 0;
                 }
 
@@ -80,7 +80,7 @@ public class CreateFile {
                 continue;
             }
             if(temp.indexOf("本次批处理") >=0){
-                excute(fileName,workBook,sheet,i);
+                excute(fileName,workBook,sheet,i,date);
                 break;
             }
             XSSFRow row = sheet.createRow(i+1);// 创建一个行对象
@@ -113,7 +113,7 @@ public class CreateFile {
         }
 
     }
-    private static void excute( String fileName, XSSFWorkbook workBook, XSSFSheet sheet, int i) throws IOException {
+    private static void excute( String fileName, XSSFWorkbook workBook, XSSFSheet sheet, int i,String date) throws IOException {
 
         XSSFRow rowTitle = sheet.createRow(0);// 创建一个行对象(表头)
         rowTitle.createCell(1).setCellValue(Column.column1);
@@ -128,7 +128,12 @@ public class CreateFile {
         // 文件输出流
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddhhmmss");
         String format = sf.format(new Date());
-        String outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
+        String outFileName = "";
+        if(date !=null){
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
+        }else{
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5;
+        }
 
         File f = new File(".\\outputfile\\");
         if(!f.exists()){
@@ -154,5 +159,5 @@ public class CreateFile {
         static String column5 = "";
         static String column6 = "";
         static String column7 = "";
-     }
+    }
 }
