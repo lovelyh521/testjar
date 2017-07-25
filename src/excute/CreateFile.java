@@ -79,7 +79,7 @@ public class CreateFile {
                 temp = br.readLine();
                 continue;
             }
-            if(temp.indexOf("本次批处理") >=0){
+            if(temp.indexOf("本次批处理") !=-1){
                 excute(fileName,workBook,sheet,i,date);
                 break;
             }
@@ -142,6 +142,8 @@ public class CreateFile {
         for(int k=0 ;k<8;k++){
             sheet.autoSizeColumn(k);
         }
+        outFileName = outFileName.replaceAll("\\\\","_");
+        outFileName = outFileName.replaceAll("/","_");
         FileOutputStream os = new FileOutputStream(".\\outputfile\\"+outFileName+".xlsx");
 //        FileOutputStream os = new FileOutputStream("d:\\"+outFileName+".xlsx");
         workBook.write(os);// 将文档对象写入文件输出流
@@ -159,5 +161,11 @@ public class CreateFile {
         static String column5 = "";
         static String column6 = "";
         static String column7 = "";
+    }
+
+
+    public static void main(String[] args) {
+        String a = "\\sdf".replaceAll("\\\\","_");
+        System.out.println("a = " + a);
     }
 }

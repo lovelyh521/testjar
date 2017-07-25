@@ -37,6 +37,7 @@ public class StartMain {
                         }
                     }
                 }
+                System.out.println("全部文件导出成功");
             }else {
                 System.out.println("读取文件错误:请创建 sourceFile 文件夹并把需要读取的文件放入其中(注意大小写)。");
             }
