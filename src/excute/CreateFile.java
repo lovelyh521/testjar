@@ -1,10 +1,15 @@
 package excute;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateFile {
     public static String readFromFile(String filePath) throws IOException {
@@ -31,6 +36,7 @@ public class CreateFile {
      * @throws FileNotFoundException
      * @throws IOException
      */
+    static Map<String,String> map = new HashMap<>();
     public static void creat2007Excel(String filePath, String fileName,String charSet,String date) throws IOException {
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet sheet = workBook.createSheet();
@@ -50,7 +56,28 @@ public class CreateFile {
 
         int i = 0;
         boolean flag = false;
+        boolean get = false;
+        int step = 0;
+
         while (temp != null) {
+            if(get){
+                try{
+                    String outFileName = map.get(fileName);
+                    if(outFileName != null){
+                        FileInputStream fs=new FileInputStream("\\outputfile\\"+outFileName+".xlsx");
+                        XSSFWorkbook wb=new XSSFWorkbook(fs);
+                        XSSFSheet sheet1=wb.getSheetAt(0);  //获取到工作表，因为一个excel可能有多个工作表
+                        step = sheet1.getLastRowNum();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    get = false;
+                }
+            }
+            if(temp.startsWith("--------------------")){
+                get = true;
+            }
             if(temp.indexOf("No")!=-1){
                 if(flag){
                     excute(fileName,workBook,sheet,i,date);
@@ -79,11 +106,11 @@ public class CreateFile {
                 temp = br.readLine();
                 continue;
             }
-            if(temp.indexOf("本次批处理") >=0){
+            if(temp.indexOf("本次批处理") !=-1){
                 excute(fileName,workBook,sheet,i,date);
                 break;
             }
-            XSSFRow row = sheet.createRow(i+1);// 创建一个行对象
+            XSSFRow row = sheet.createRow(i+1+step);// 创建一个行对象
             if(temp != null && !"".equals(temp.trim())){
                 String[] split = temp.trim().split("\\s+");
                 String[] split1 = split[0].split(",");
@@ -124,17 +151,11 @@ public class CreateFile {
         rowTitle.createCell(6).setCellValue(Column.column6);
         rowTitle.createCell(7).setCellValue(Column.column7);
 
+
         System.out.println("共转换 "+i+" 条数据");
         // 文件输出流
-        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddhhmmss");
-        String format = sf.format(new Date());
-        String outFileName = "";
-        if(date !=null){
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
-        }else{
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5;
-        }
 
+        String outFileName =crestFileName(fileName,date);
         File f = new File(".\\outputfile\\");
         if(!f.exists()){
             f.mkdir();
@@ -148,9 +169,24 @@ public class CreateFile {
 
         os.close();// 关闭文件输出流
         System.out.println("创建成功:.\\outputfile\\"+outFileName+".xlsx");
+        map.put(fileName,outFileName);
         workBook = new XSSFWorkbook();
         sheet = workBook.createSheet();// 创建一个工作薄对象
     }
+
+
+    private static String crestFileName(String fileName,String date){
+        String outFileName = "";
+        if(date !=null){
+            SimpleDateFormat sf = new SimpleDateFormat(date);
+            String format = sf.format(new Date());
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
+        }else{
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5;
+        }
+        return outFileName;
+    }
+
     private static class Column {
         static String column1 = "";
         static String column2 = "";

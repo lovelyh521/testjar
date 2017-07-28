@@ -5,7 +5,7 @@ import java.io.*;
 public class StartMain {
     public static void main(String[] args) {
         String charset = "GB2312";
-        String date = null;
+        String date = "";
         /*if(args.length>0){
             chatset = args[0];
         }*/
@@ -21,8 +21,8 @@ public class StartMain {
         }
 
 
-//        String path = "d:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
-        String path = System.getProperty("user.dir")+ "\\sourceFile";
+        String path = "f:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
+//        String path = System.getProperty("user.dir")+ "\\sourceFile";
         System.out.println("读取文件目录："+path);
         File file = new File(path);
         if(file != null){
