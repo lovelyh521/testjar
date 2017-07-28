@@ -1,11 +1,11 @@
-import excute.CreateFile;
+import excute.CreateExcelFile;
 
 import java.io.*;
 
 public class StartMain {
     public static void main(String[] args) {
         String charset = "GB2312";
-        String date = null;
+        String date = "";
         /*if(args.length>0){
             chatset = args[0];
         }*/
@@ -21,7 +21,7 @@ public class StartMain {
         }
 
 
-//        String path = "d:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
+//        String path = "f:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
         String path = System.getProperty("user.dir")+ "\\sourceFile";
         System.out.println("读取文件目录："+path);
         File file = new File(path);
@@ -31,7 +31,7 @@ public class StartMain {
                 for(File fl:files){
                     if(fl.isFile()){
                         try {
-                            CreateFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
+                            CreateExcelFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
