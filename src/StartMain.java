@@ -1,4 +1,4 @@
-import excute.CreateExcelFile;
+import excute.CreateCSVFile;
 
 import java.io.*;
 
@@ -31,7 +31,8 @@ public class StartMain {
                 for(File fl:files){
                     if(fl.isFile()){
                         try {
-                            CreateExcelFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
+//                            CreateExcelFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
+                            CreateCSVFile.createCVS(fl.getPath(),fl.getName(),charset,date);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

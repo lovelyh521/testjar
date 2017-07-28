@@ -80,6 +80,7 @@ public class CreateExcelFile {
             }
             if(temp.startsWith("--------------------")){
                 get = true;
+                continue;
             }
             if(temp.indexOf("No")!=-1){
                 if(flag){
