@@ -21,8 +21,8 @@ public class StartMain {
         }
 
 
-        String path = "f:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
-//        String path = System.getProperty("user.dir")+ "\\sourceFile";
+//        String path = "f:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
+        String path = System.getProperty("user.dir")+ "\\sourceFile";
         System.out.println("读取文件目录："+path);
         File file = new File(path);
         if(file != null){

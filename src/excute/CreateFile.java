@@ -37,6 +37,9 @@ public class CreateFile {
      * @throws IOException
      */
     static Map<String,String> map = new HashMap<>();
+    static int step = 0;
+    static int totleCount = 0;
+
     public static void creat2007Excel(String filePath, String fileName,String charSet,String date) throws IOException {
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet sheet = workBook.createSheet();
@@ -57,21 +60,21 @@ public class CreateFile {
         int i = 0;
         boolean flag = false;
         boolean get = false;
-        int step = 0;
 
         while (temp != null) {
             if(get){
                 try{
-                    String outFileName = map.get(fileName);
+                    String outFileName = map.get(Column.column7);
                     if(outFileName != null){
-                        FileInputStream fs=new FileInputStream("\\outputfile\\"+outFileName+".xlsx");
+                        FileInputStream fs=new FileInputStream(".\\outputfile\\"+outFileName+".xlsx");
                         XSSFWorkbook wb=new XSSFWorkbook(fs);
                         XSSFSheet sheet1=wb.getSheetAt(0);  //获取到工作表，因为一个excel可能有多个工作表
                         step = sheet1.getLastRowNum();
                     }
                 }catch (Exception e){
-                    e.printStackTrace();
+                    System.out.println("文件不存在将生成");
                 }finally {
+                    System.out.println(step);
                     get = false;
                 }
             }
@@ -106,7 +109,7 @@ public class CreateFile {
                 temp = br.readLine();
                 continue;
             }
-            if(temp.indexOf("本次批处理") !=-1){
+            if(temp.indexOf("本次批处理") >=0){
                 excute(fileName,workBook,sheet,i,date);
                 break;
             }
@@ -122,8 +125,6 @@ public class CreateFile {
                 Column.column4 = split1[3].split("=")[0];
                 Column.column5 = split1[4].split("=")[0];
 
-
-
                 for(int s1 = 0 ;s1<split1.length;s1++){
                     XSSFCell cell2 = row.createCell(s1+1);// 创建单元格
                     cell2.setCellValue(split1[s1].split("=")[1]);
@@ -132,26 +133,27 @@ public class CreateFile {
                     XSSFCell cell = row.createCell(5+j);// 创建单元格
                     cell.setCellValue(split[j]);
                 }
-
                 i++;
             }
 
             temp = br.readLine();
         }
-
+        System.out.println("当前文件共生成"+totleCount+"条数据");
     }
+    static int j=0;
     private static void excute( String fileName, XSSFWorkbook workBook, XSSFSheet sheet, int i,String date) throws IOException {
+        if(step == 0){
+            XSSFRow rowTitle = sheet.createRow(0);// 创建一个行对象(表头)
+            rowTitle.createCell(1).setCellValue(Column.column1);
+            rowTitle.createCell(2).setCellValue(Column.column2);
+            rowTitle.createCell(3).setCellValue(Column.column3);
+            rowTitle.createCell(4).setCellValue(Column.column4);
+            rowTitle.createCell(5).setCellValue(Column.column5);
+            rowTitle.createCell(6).setCellValue(Column.column6);
+            rowTitle.createCell(7).setCellValue(Column.column7);
+        }
 
-        XSSFRow rowTitle = sheet.createRow(0);// 创建一个行对象(表头)
-        rowTitle.createCell(1).setCellValue(Column.column1);
-        rowTitle.createCell(2).setCellValue(Column.column2);
-        rowTitle.createCell(3).setCellValue(Column.column3);
-        rowTitle.createCell(4).setCellValue(Column.column4);
-        rowTitle.createCell(5).setCellValue(Column.column5);
-        rowTitle.createCell(6).setCellValue(Column.column6);
-        rowTitle.createCell(7).setCellValue(Column.column7);
-
-
+        totleCount += i;
         System.out.println("共转换 "+i+" 条数据");
         // 文件输出流
 
@@ -181,9 +183,11 @@ public class CreateFile {
 
         os.close();// 关闭文件输出流
         System.out.println("创建成功:.\\outputfile\\"+outFileName+".xlsx");
-        map.put(fileName,outFileName);
+        System.out.println(++j+"---------------------------------------------------------------");
+        map.put(Column.column7,outFileName);
         workBook = new XSSFWorkbook();
         sheet = workBook.createSheet();// 创建一个工作薄对象
+        step = 0;
     }
 
 
@@ -192,9 +196,9 @@ public class CreateFile {
         if(date !=null){
             SimpleDateFormat sf = new SimpleDateFormat(date);
             String format = sf.format(new Date());
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7+format;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"_"+Column.column7+format;
         }else{
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"_"+Column.column7;
         }
         return outFileName;
     }
