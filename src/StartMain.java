@@ -1,4 +1,4 @@
-import excute.CreateFile;
+import excute.CreateExcelFile;
 
 import java.io.*;
 
@@ -31,7 +31,7 @@ public class StartMain {
                 for(File fl:files){
                     if(fl.isFile()){
                         try {
-                            CreateFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
+                            CreateExcelFile.creat2007Excel(fl.getPath(),fl.getName(),charset,date);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

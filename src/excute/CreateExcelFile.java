@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateFile {
+public class CreateExcelFile {
     public static String readFromFile(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists() || file.isDirectory())
