@@ -22,7 +22,7 @@ public class CreateFile {
         String temp = null;
         StringBuffer sb = new StringBuffer();
         temp = br.readLine();
-        while (temp != null) {
+            while (temp != null) {
             sb.append(temp + "\r\n");
             temp = br.readLine();
         }
@@ -155,7 +155,16 @@ public class CreateFile {
         System.out.println("共转换 "+i+" 条数据");
         // 文件输出流
 
-        String outFileName =crestFileName(fileName,date);
+        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String format = sf.format(new Date());
+       /* String outFileName = "";
+        if(date !=null){
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7+format;
+        }else{
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7;
+        }*/
+
+
         File f = new File(".\\outputfile\\");
         if(!f.exists()){
             f.mkdir();
@@ -163,8 +172,11 @@ public class CreateFile {
         for(int k=0 ;k<8;k++){
             sheet.autoSizeColumn(k);
         }
-        FileOutputStream os = new FileOutputStream(".\\outputfile\\"+outFileName+".xlsx");
+        String outFileName =crestFileName(fileName,date);
+        outFileName = outFileName.replaceAll("\\\\","_");
+        outFileName = outFileName.replaceAll("/","_");
 //        FileOutputStream os = new FileOutputStream("d:\\"+outFileName+".xlsx");
+        FileOutputStream os = new FileOutputStream(".\\outputfile\\"+outFileName+".xlsx");
         workBook.write(os);// 将文档对象写入文件输出流
 
         os.close();// 关闭文件输出流
@@ -180,9 +192,9 @@ public class CreateFile {
         if(date !=null){
             SimpleDateFormat sf = new SimpleDateFormat(date);
             String format = sf.format(new Date());
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5+format;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7+format;
         }else{
-            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column5;
+            outFileName = fileName.substring(0, fileName.indexOf("."))+"-"+Column.column7;
         }
         return outFileName;
     }
@@ -195,5 +207,11 @@ public class CreateFile {
         static String column5 = "";
         static String column6 = "";
         static String column7 = "";
+    }
+
+
+    public static void main(String[] args) {
+        String a = "\\sdf".replaceAll("\\\\","_");
+        System.out.println("a = " + a);
     }
 }
