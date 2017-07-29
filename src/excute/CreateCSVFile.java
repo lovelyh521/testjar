@@ -46,22 +46,9 @@ public class CreateCSVFile {
         boolean flag = false;
         boolean flag1 = false;
         boolean get = false;
-
+        int count = 0;
+        System.out.println("---------------------------------"+fileName+"--------------------------------");
         while (temp != null) {
-           /* if(get){
-                try{
-                    String outFileName = map.get(Column.column7);
-                    if(outFileName != null){
-                        FileInputStream fs=new FileInputStream(".\\outputfile\\"+outFileName+".xlsx");
-
-                    }
-                }catch (Exception e){
-                    System.out.println("文件不存在将生成");
-                }finally {
-                    System.out.println(step);
-                    get = false;
-                }
-            }*/
             if(temp.startsWith("---------------------------------")){
                 get = true;
                 flag = true;
@@ -73,7 +60,7 @@ public class CreateCSVFile {
             }
             if(temp.indexOf("No")!=-1){
                 if(flag1){
-                    System.out.println("生成"+i+"条数据");
+                    System.out.println(++count+".生成"+i+"条数据");
                 }
                 flag1=true;
                 totleCount += i;
@@ -106,10 +93,12 @@ public class CreateCSVFile {
             }
             if(temp.startsWith("本次批处理")){
                 csvWriter.close();
+                System.out.println(++count+".生成"+i+"条数据");
+                totleCount += i;
                 csvWriter=null;
                 break;
             }
-            String[] content = new String[10];
+            String[] content = new String[9];
 
             if(temp != null && !"".equals(temp.trim())){
                 String[] split = temp.trim().split("\\s{2,}");
@@ -143,7 +132,8 @@ public class CreateCSVFile {
             }
             temp = br.readLine();
         }
-        System.out.println("当前文件共生成"+totleCount+"条数据");
+        System.out.println(">>当前文件共生成"+totleCount+"条数据");
+        System.out.println("---------------------------------"+fileName+"--------------------------------");
     }
     static int j=0;
 
