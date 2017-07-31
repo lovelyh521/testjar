@@ -17,9 +17,6 @@ public class CreateCSVFile {
     static int totleCount = 0;
 
     public static void createCVS(String filePath, String fileName,String charSet,String date) throws IOException {
-//        XSSFWorkbook workBook = new XSSFWorkbook();
-//        XSSFSheet sheet = workBook.createSheet();
-
         // 创建CSV写对象
         CsvWriter csvWriter = null;
 
