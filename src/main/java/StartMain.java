@@ -5,7 +5,7 @@ import java.io.*;
 public class StartMain {
     public static void main(String[] args) {
         String charset = "GB2312";
-        String date = "";
+        String date = null;
         /*if(args.length>0){
             chatset = args[0];
         }*/
@@ -21,7 +21,8 @@ public class StartMain {
         }
 
 
-//        String path = "f:\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
+//        date = "ss";
+//        String path = "F:\\旧项目\\testjar\\out\\artifacts\\testjar_jar\\sourceFile";
         String path = System.getProperty("user.dir")+ "\\sourceFile";
         System.out.println("读取文件目录："+path);
         File file = new File(path);
@@ -38,7 +39,7 @@ public class StartMain {
                         }
                     }
                 }
-                System.out.println("全部文件导出成功");
+                System.out.println("-------------------------全部文件导出成功------------------------");
             }else {
                 System.out.println("读取文件错误:请创建 sourceFile 文件夹并把需要读取的文件放入其中(注意大小写)。");
             }
