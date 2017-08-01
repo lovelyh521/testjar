@@ -44,11 +44,11 @@ public class CreateCSVFile {
             if(temp.startsWith("---------------------------------")){
                 flag = true;
                 String outFileName = crestFilePath(fileName, date);
-                csvWriter = new CsvWriter(outFileName,',', Charset.forName("GB2312"));
+                csvWriter = new CsvWriter(outFileName,',', Charset.forName(charSet));
                 try{
                     if(outFileName != null){
                         csvList = new ArrayList(); //用来保存数据
-                        CsvReader csvReader = new CsvReader(outFileName,',', Charset.forName("GB2312"));
+                        CsvReader csvReader = new CsvReader(outFileName,',', Charset.forName(charSet));
                         while (csvReader.readRecord()){
                             csvList.add(csvReader.getValues());
                         }
