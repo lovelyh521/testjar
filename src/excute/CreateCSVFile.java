@@ -20,17 +20,9 @@ public class CreateCSVFile {
     static int totleCount = 0;
 
     public static void createCVS(String filePath, String fileName,String charSet,String date) throws IOException {
-//        XSSFWorkbook workBook = new XSSFWorkbook();
-//        XSSFSheet sheet = workBook.createSheet();
 
         // 创建CSV写对象
         CsvWriter csvWriter = null;
-
-
-        /*csvWriter.close();*/
-
-
-
 
         File file = new File(filePath);
         if (!file.exists() || file.isDirectory()){
@@ -49,7 +41,7 @@ public class CreateCSVFile {
         boolean flag1 = false;
         boolean get = false;
         int count = 0;
-        System.out.println("---------------------------------"+fileName+"--------------------------------");
+//        System.out.println("---------------------------------"+fileName+"--------------------------------");
         while (temp != null) {
             if(temp.startsWith("---------------------------------")){
                 flag = true;
@@ -58,7 +50,7 @@ public class CreateCSVFile {
                 try{
                     if(outFileName != null){
                         csvList = new ArrayList(); //用来保存数据
-                        CsvReader csvReader = new CsvReader(outFileName);
+                        CsvReader csvReader = new CsvReader(outFileName,',', Charset.forName("GB2312"));
                         while (csvReader.readRecord()){
                             csvList.add(csvReader.getValues());
                         }
@@ -145,21 +137,19 @@ public class CreateCSVFile {
             temp = br.readLine();
         }
         System.out.println(">>当前文件共生成"+totleCount+"条数据");
-        System.out.println("---------------------------------"+fileName+"--------------------------------");
+//        System.out.println("---------------------------------"+fileName+"--------------------------------");
     }
 
 
     private static String crestFilePath(String fileName, String date){
         String outFileName = "";
-        if(date !=null){
-//            SimpleDateFormat sf = new SimpleDateFormat(date);
-//            String format = sf.format(new Date());
+        /*if(date !=null){
             String format = String.valueOf(System.currentTimeMillis());
             outFileName = fileName.substring(0, fileName.indexOf("."))+"_"+ Column.column7+"_"+format.substring(7);
         }else{
             outFileName = fileName.substring(0, fileName.indexOf("."))+"_"+ Column.column7;
-        }
-
+        }*/
+        outFileName = Column.column7;
         File f = new File(".\\outputfile\\");
         if(!f.exists()){
             f.mkdir();
